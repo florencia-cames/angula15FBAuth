@@ -35,3 +35,24 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 Es importante tener en cuenta que la biblioteca de Firebase puede generar errores en TypeScript, por lo que ya se ha agregado "skipLibCheck": true en el archivo tsconfig.json.
 
 It's important to know that the Firebase library may cause errors in TypeScript, so "skipLibCheck": true has already been added to the tsconfig.json file.
+
+# envirnmonts
+
+Recuerda crear la carpeta "environments" dentro de "src" y asegúrate de incluir un archivo de configuración con tus datos de Firebase. El nombre del archivo debería ser algo como esto:
+
+Remember to generate the "environments" folder within "src" and include a configuration file with your Firebase data. The filename should look something like this:
+
+```
+export const environment = {
+  production: false,
+  firebaseConfig: {
+    apiKey: 'xxx',
+    authDomain: 'xxx',
+    projectId: 'xxx',
+    storageBucket: 'xxx',
+    messagingSenderId: 'xxx',
+    appId: 'xxx',
+    measurementId: 'xxx',
+  },
+};
+```
