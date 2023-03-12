@@ -36,7 +36,7 @@ Es importante tener en cuenta que la biblioteca de Firebase puede generar errore
 
 It's important to know that the Firebase library may cause errors in TypeScript, so "skipLibCheck": true has already been added to the tsconfig.json file.
 
-# envirnmonts
+# environments
 
 Recuerda crear la carpeta "environments" dentro de "src" y asegúrate de incluir un archivo de configuración con tus datos de Firebase. El nombre del archivo debería ser algo como esto:
 
