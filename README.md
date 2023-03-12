@@ -29,3 +29,9 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 ## Running end-to-end tests
 
 Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+
+# Setup notes
+
+Es importante tener en cuenta que la biblioteca de Firebase puede generar errores en TypeScript, por lo que ya se ha agregado "skipLibCheck": true en el archivo tsconfig.json.
+
+It's important to know that the Firebase library may cause errors in TypeScript, so "skipLibCheck": true has already been added to the tsconfig.json file.
