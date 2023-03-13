@@ -5,10 +5,12 @@
     "outDir": "./out-tsc/spec",
     "types": [
       "jasmine"
-    ]
+    ], 
   },
+  "exclude": ["src/mocks/angularFireBase.mock.ts",  "src/**/*.mock.ts",  "src/mocks", "**/angularFireBase.mock.ts"],
   "include": [
-    "src/**/*.spec.ts",
-    "src/**/*.d.ts"
-  ]
+    "src/app/**/*.spec.ts"
+  ],
+  
+ 
 }

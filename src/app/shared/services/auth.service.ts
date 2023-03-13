@@ -33,8 +33,8 @@ export class AuthService {
   SignIn(email: string, password: string) {
     return this.afAuth
       .signInWithEmailAndPassword(email, password)
-      .then((result) => {
-        this.afAuth.authState.subscribe((user) => {
+      .then((result: any) => {
+        this.afAuth.authState.subscribe((user: any) => {
           if (user) {
             this.router.navigate(['/dashboard']);
           }
@@ -48,7 +48,7 @@ export class AuthService {
   SignUp(email: string, password: string) {
     return this.afAuth
       .createUserWithEmailAndPassword(email, password)
-      .then((result) => {
+      .then((result: any) => {
         window.alert('Para acceder a su cuenta debe primero activar su email.');
         this.SendVerificationMail();
       })
@@ -59,8 +59,8 @@ export class AuthService {
 
   SendVerificationMail() {
     return this.afAuth.currentUser
-      .then((u: any) => {
-        u.sendEmailVerification();
+      .then((u) => {
+        u?.sendEmailVerification();
         this.SignOut();
       })
       .catch((err) => {})
@@ -83,30 +83,10 @@ export class AuthService {
   get isLoggedIn(): boolean {
     const user = JSON.parse(localStorage.getItem('user')!);
     if (user && user.emailVerified == false) {
-      setTimeout(() => {
-        window.alert('Para acceder a su cuenta debe primero activar su email.');
-
-        this.SignOut();
-      }, 300);
+      window.alert('Para acceder a su cuenta debe primero activar su email.');
+      this.SignOut();
     }
     return user !== null && user.emailVerified !== false ? true : false;
-  }
-
-  GoogleAuth() {
-    return this.AuthLogin(new auth.GoogleAuthProvider()).then((res: any) => {
-      this.router.navigate(['dashboard']);
-    });
-  }
-
-  AuthLogin(provider: any) {
-    return this.afAuth
-      .signInWithPopup(provider)
-      .then((result) => {
-        this.router.navigate(['dashboard']);
-      })
-      .catch((error) => {
-        window.alert(error);
-      });
   }
 
   SignOut() {

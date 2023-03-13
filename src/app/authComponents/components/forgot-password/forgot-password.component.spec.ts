@@ -1,4 +1,6 @@
+import { environment } from './../../../../environments/environment';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { AngularFireModule } from '@angular/fire/compat';
 
 import { ForgotPasswordComponent } from './forgot-password.component';
 
@@ -8,9 +10,16 @@ describe('ForgotPasswordComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ForgotPasswordComponent ]
-    })
-    .compileComponents();
+      declarations: [ForgotPasswordComponent],
+      imports: [AngularFireModule.initializeApp(environment.firebaseConfig)],
+      providers: [
+        // Aquí debe agregar los proveedores faltantes
+        {
+          provide: 'angularfire2.app.options',
+          useValue: environment.firebaseConfig,
+        },
+      ],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ForgotPasswordComponent);
     component = fixture.componentInstance;

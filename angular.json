@@ -86,6 +86,7 @@
               "zone.js",
               "zone.js/testing"
             ],
+            "exclude": ["src/mocks/angularFireBase.mock.ts",  "src/**/*.mock.ts", "src/mock", "**/angularFireBase.mock.ts"],
             "tsConfig": "tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [
