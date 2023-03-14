@@ -1,4 +1,7 @@
-import { AngularFireAuthMock } from '../../../mocks/angularFirebase.mock.spec';
+import {
+  AngularFireAuthMock,
+  mockUser,
+} from '../../../mocks/angularFirebase.mock.spec';
 import { environment } from './../../../environments/environment';
 import { fakeAsync, TestBed, tick } from '@angular/core/testing';
 
@@ -27,6 +30,9 @@ describe('AuthService', () => {
     authService = TestBed.inject(AuthService);
     afAuth = TestBed.inject(AngularFireAuth) as unknown as AngularFireAuthMock; // Convertimos AngularFireAuth a su mock correspondiente
     mockAlert = spyOn(window, 'alert');
+    Object.defineProperty(authService.afAuth, 'currentUser', {
+      get: () => Promise.resolve(mockUser as firebase.User),
+    });
   });
 
   it('should be created', () => {
@@ -119,5 +125,43 @@ describe('AuthService', () => {
     expect(signOutSpy).toHaveBeenCalled();
     expect(removeItemSpy).toHaveBeenCalledWith('user');
     expect(navigateSpy).toHaveBeenCalledWith(['login']);
+  }));
+
+  it('should delete user account', fakeAsync(() => {
+    mockUser.delete = jasmine
+      .createSpy('delete')
+      .and.returnValue(Promise.resolve());
+    spyOnProperty(authService.afAuth, 'currentUser', 'get').and.returnValue(
+      Promise.resolve(mockUser)
+    );
+
+    spyOn(authService.router, 'navigate');
+
+    authService.deleteUser();
+    tick();
+
+    expect(mockUser.delete).toHaveBeenCalled();
+    expect(window.alert).toHaveBeenCalledWith('Cuenta borrada exitosamente');
+    expect(authService.router.navigate).toHaveBeenCalledWith(['login']);
+  }));
+
+  it('should show error message when user account cannot be deleted', fakeAsync(() => {
+    mockUser.delete = jasmine
+      .createSpy('delete')
+      .and.returnValue(Promise.reject(new Error('Error deleting account')));
+    spyOnProperty(authService.afAuth, 'currentUser', 'get').and.returnValue(
+      Promise.resolve(mockUser)
+    );
+
+    spyOn(authService.router, 'navigate');
+
+    authService.deleteUser();
+    tick();
+
+    expect(mockUser.delete).toHaveBeenCalled();
+    expect(window.alert).toHaveBeenCalledWith(
+      'Para poder borrar tu cuenta necesitamos que vuelvas a iniciar sesión y hagas click aquí nuevamente, asi nos aseguramos de que seas el dueño de la misma.'
+    );
+    expect(authService.router.navigate).not.toHaveBeenCalled();
   }));
 });

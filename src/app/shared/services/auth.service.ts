@@ -95,4 +95,20 @@ export class AuthService {
       this.router.navigate(['login']);
     });
   }
+
+  deleteUser() {
+    this.afAuth.currentUser.then((user: any) => {
+      user
+        ?.delete()
+        .then(() => {
+          window.alert('Cuenta borrada exitosamente');
+          this.router.navigate(['login']);
+        })
+        .catch((error: any) => {
+          window.alert(
+            'Para poder borrar tu cuenta necesitamos que vuelvas a iniciar sesión y hagas click aquí nuevamente, asi nos aseguramos de que seas el dueño de la misma.'
+          );
+        });
+    });
+  }
 }

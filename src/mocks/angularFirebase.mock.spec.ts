@@ -26,7 +26,7 @@ export const mockUser = {
     };
   },
   delete: function (): Promise<void> {
-    throw new Error('Function not implemented.');
+    return Promise.resolve();
   },
   isAnonymous: false,
   linkAndRetrieveDataWithCredential: function (
@@ -135,8 +135,8 @@ export class AngularFireAuthMock {
   signOut: () => {} = () => {
     return Promise.resolve();
   };
-  currentUser: Promise<firebase.User | null> = Promise.resolve(
-    mockUser as firebase.User
-  );
+  currentUser: () => {} = () => {
+    return Promise.resolve(mockUser as firebase.User);
+  };
   authState: Observable<firebase.User | null> = of(mockUser);
 }
