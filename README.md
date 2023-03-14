@@ -1,8 +1,8 @@
-# Base template Angular 15 + firebase 9.17.2
+# Base template Angular 15 + firebase 9.17.2 + authService (firebaseAuth) TESTING!!
 
-Plantilla base con Angular 15 y Firebase, sin CSS, que incluye funcionalidades de inicio de sesión, cierre de sesión, control de acceso, registro de usuario y restablecimiento de contraseña.
+Plantilla base con Angular 15 y Firebase, sin CSS, que incluye funcionalidades de inicio de sesión, cierre de sesión, control de acceso, registro de usuario y restablecimiento de contraseña. Además, agregué pruebas para las funciones del servicio de autenticación implementadas con Firebase.
 
-Base template with Angular 15 and Firebase, without CSS, featuring login, logout, can activate, register, reset password functionalities.
+Base template with Angular 15 and Firebase, without CSS, featuring login, logout, can activate, register, reset password functionalities. Additionally, I added testing for the authentication service functions implemented with Firebase.
 
 # Primeros paso - First steps
 
